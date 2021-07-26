@@ -15,7 +15,7 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.erikgodoy.workshopmongo.domain.Post;
 import com.erikgodoy.workshopmongo.domain.User;
-import com.erikgodoy.workshopmongo.dto.UserDto;
+import com.erikgodoy.workshopmongo.dto.UserDTO;
 import com.erikgodoy.workshopmongo.services.UserService;
 
 @RestController
@@ -26,17 +26,17 @@ public class UserResources {
 	private UserService service;
 
 	@RequestMapping(method = RequestMethod.GET)
-	public ResponseEntity<List<UserDto>> findAll() {
+	public ResponseEntity<List<UserDTO>> findAll() {
 		List<User> list = service.findAll();
-		List<UserDto> listDto = list.stream().map(x -> new UserDto(x)).collect(Collectors.toList());
+		List<UserDTO> listDto = list.stream().map(x -> new UserDTO(x)).collect(Collectors.toList());
 		return ResponseEntity.ok().body(listDto);
 
 	}
 
 	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
-	public ResponseEntity<UserDto> findById(@PathVariable String id) {
+	public ResponseEntity<UserDTO> findById(@PathVariable String id) {
 		User obj = service.findById(id);
-		return ResponseEntity.ok().body(new UserDto(obj));
+		return ResponseEntity.ok().body(new UserDTO(obj));
 	}
 
 	@RequestMapping(method = RequestMethod.POST)
